@@ -114,8 +114,8 @@ class Animation {
       map(options.props, (prop) => {
         if (prop && prop.element) {
           let transitionProps = transformProperty(prop.property, prop.end);
-          let exist = find(transitionMap, (o) => {
-            return o && o.element === prop.element;
+          let exist = find(transitionMap, (transitionItem) => {
+            return transitionItem && transitionItem.element === prop.element;
           });
 
           if (exist) {
@@ -136,18 +136,18 @@ class Animation {
           }
         }
       });
-      map(transitionMap, (o) => {
+      map(transitionMap, (transitionItem) => {
         let transitionProps = {
-          ...o.props,
-          ...o.props.transform ? {
-            transform: o.props.transform.join(' '),
-            webkitTransform: o.props.transform.join(' ')
+          ...transitionItem.props,
+          ...transitionItem.props.transform ? {
+            transform: transitionItem.props.transform.join(' '),
+            webkitTransform: transitionItem.props.transform.join(' ')
           } : {}
         };
-        miniAppResult[o.element] = transition('', transitionProps, {
-          duration: o.duration,
-          timingFunction: o.easing,
-          delay: o.delay
+        miniAppResult[transitionItem.element] = transition('', transitionProps, {
+          duration: transitionItem.duration,
+          timingFunction: transitionItem.easing,
+          delay: transitionItem.delay
         }).export();
       });
 
