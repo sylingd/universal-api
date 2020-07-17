@@ -22,9 +22,7 @@ export function stringifyQS(qs: AsObject): string {
   }
   const str: string[] = [];
   for (const key in qs) {
-    if (!!qs[key]) {
-      str.push(`${key}=${encodeURIComponent(String(qs[key]))}`);
-    }
+    str.push(`${key}=${encodeURIComponent(String(qs[key]))}`);
   }
   return str.join('&');
 }
